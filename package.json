@@ -1,0 +1,19 @@
+{
+  "name": "groomers",
+  "version": "1.0.0",
+  "description": "Appointment Booking Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivangg66/Groomers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivangg66/Groomers/issues"
+  },
+  "homepage": "https://github.com/shivangg66/Groomers#readme"
+}
