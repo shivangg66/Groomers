@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const userController = require('../controller/user');
+const { authController, defaultHandler } = require("../controller");
 //Dummy Api
-router.get('/',(req,res)=>res.send('User api'));
+router.get("/", defaultHandler);
 
 // @route POST api/user/registerUser
 // @desc register user
-router.post('/registerUser', userController.userRegister());
-
+router.post("/signup", authController.userSignUp);
+router.post("/login", authController.userLogin);
 module.exports = router;
