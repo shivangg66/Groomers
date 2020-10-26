@@ -19,5 +19,6 @@
             "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
         }
     },
-    "required": ["password"]
+    "required": ["password"],
+    "anyOf": [{ "required": ["phone_number"] }, { "required": ["email_id"] }]
 }
