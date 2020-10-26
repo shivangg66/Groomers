@@ -1,48 +1,36 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "/mer-signup",
+    "$id": "/merchant-signup",
     "title": "merchant-signup",
     "description": "This Schema contains all the fields required to register Merchnat",
     "type": "object",
     "properties": {
-        "First_Name": {
+        "first_name": {
             "type": "string"
         },
-        "Last_Name": {
+        "last_name": {
             "type": "string"
         },
-        "Phone_No": {
+        "phone_number": {
             "type": "number",
             "minLength": 10,
             "maxLength": 10
         },
-        "Alternate Phone_No": {
-            "type": "number",
-            "minLength": 10,
-            "maxLength": 10
-        },
-        "Email_ID": {
+        "email_id": {
             "type": "string",
             "format": "email"
         },
-        "Password": {
+        "password": {
             "type": "string",
-            "format": "password",
             "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
         },
-        "Confirm_Password": {
-            "type": "string",
-            "format": "password",
-            "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
-        },
-        "DOB": {
+        "dob": {
             "description": "YYYY-MM-DD",
-            "type": "number",
+            "type": "string",
             "format": "date"
         },
-        "Address": {
+        "address": {
             "type": "object",
-            "format": "address",
             "properties": {
                 "street1": {
                     "type": "string"
@@ -72,5 +60,5 @@
             "required": ["street1", "city", "state", "district", "pin_code", "country"]
         }
     },
-    "required": ["First_Name", "Last_Name", "Phone_No", "Email_ID", "Password", "Confirm_Password", "DOB", "Address"]
+    "required": ["first_name", "last_name", "phone_number", "email_id", "password", "dob", "address"]
 }
