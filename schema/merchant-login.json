@@ -6,7 +6,7 @@
     "type": "object",
     "properties": {
         "phone_number": {
-            "type": "number",
+            "type": "string",
             "maxLength": 10,
             "minLength": 10
         },
