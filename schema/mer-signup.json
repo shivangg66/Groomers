@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "/mer-signup",
+    "title": "merchant-signup",
+    "description": "This Schema contains all the fields required to register Merchnat",
+    "type": "object",
+    "properties": {
+        "First_Name": {
+            "type": "string"
+        },
+        "Last_Name": {
+            "type": "string"
+        },
+        "Phone_No": {
+            "type": "number",
+            "minLength": 10,
+            "maxLength": 10
+        },
+        "Alternate Phone_No": {
+            "type": "number",
+            "minLength": 10,
+            "maxLength": 10
+        },
+        "Email_ID": {
+            "type": "string",
+            "format": "email"
+        },
+        "Password": {
+            "type": "string",
+            "format": "password",
+            "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
+        },
+        "Confirm_Password": {
+            "type": "string",
+            "format": "password",
+            "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
+        },
+        "DOB": {
+            "description": "YYYY-MM-DD",
+            "type": "number",
+            "format": "date"
+        },
+        "Address": {
+            "type": "object",
+            "format": "address",
+            "properties": {
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                },
+                "street3": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "pin_code": {
+                    "type": "number"
+                },
+                "country": {
+                    "type": "string"
+                }
+            },
+            "required": ["street1", "city", "state", "district", "pin_code", "country"]
+        }
+    },
+    "required": ["First_Name", "Last_Name", "Phone_No", "Email_ID", "Password", "Confirm_Password", "DOB", "Address"]
+}
