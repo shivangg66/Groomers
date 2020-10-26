@@ -5,14 +5,11 @@
     "description": "This Schema contains all the fields required to register Merchnat",
     "type": "object",
     "properties": {
-        "first_name": {
-            "type": "string"
-        },
-        "last_name": {
+        "name": {
             "type": "string"
         },
         "phone_number": {
-            "type": "number",
+            "type": "string",
             "minLength": 10,
             "maxLength": 10
         },
