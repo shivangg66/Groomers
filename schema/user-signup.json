@@ -4,12 +4,12 @@
   "title": "user on signup",
   "type": "object",
   "additionalProperties": false,
-  "required": ["name", "mobile_number", "dob", "email_id", "password"],
+  "required": ["name", "phone_number", "dob", "email_id", "password"],
   "properties": {
     "name": {
       "type": "string"
     },
-    "mobile_number": {
+    "phone_number": {
       "type": "string",
       "maxLength": 10,
       "minLength": 10
@@ -26,34 +26,35 @@
       "minLength": 6,
       "pattern": "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#!%*?&]).{6,20}$"
     },
-    "addresses": {
+    "address": {
       "type": "object",
       "properties": {
-        "home": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "street_address": { "type": "string" },
-              "city": { "type": "string" },
-              "state": { "type": "string" },
-              "pincode": { "type": "string" }
-            }
+          "street1": {
+              "type": "string"
+          },
+          "street2": {
+              "type": "string"
+          },
+          "street3": {
+              "type": "string"
+          },
+          "city": {
+              "type": "string"
+          },
+          "state": {
+              "type": "string"
+          },
+          "district": {
+              "type": "string"
+          },
+          "pin_code": {
+              "type": "number"
+          },
+          "country": {
+              "type": "string"
           }
-        },
-        "office": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "street_address": { "type": "string" },
-              "city": { "type": "string" },
-              "state": { "type": "string" },
-              "pincode": { "type": "string" }
-            }
-          }
-        }
-      }
+      },
+      "required": ["street1", "city", "state", "district", "pin_code", "country"]
     },
     "is_active": {
       "type": "boolean"
