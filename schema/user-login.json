@@ -5,9 +5,9 @@
   "type": "object",
   "additionalProperties": false,
   "required": ["password"],
-  "anyOf": [{ "required": ["mobile_number"] }, { "required": ["email_id"] }],
+  "anyOf": [{ "required": ["phone_number"] }, { "required": ["email_id"] }],
   "properties": {
-    "mobile_number": {
+    "phone_number": {
       "type": "string",
       "maxLength": 10,
       "minLength": 10

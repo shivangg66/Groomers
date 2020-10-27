@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
-const signUpSchema = new Schema({
+const UserSignUpSchema = new Schema({
   user_id: {
     type: String,
     required: true,
@@ -11,13 +11,14 @@ const signUpSchema = new Schema({
     type: String,
     required: true,
   },
-  mobile_number: {
+  phone_number: {
     type: String,
     required: true,
   },
   email_id: {
     type: String,
     required: true,
+    unique: true
   },
   dob: {
     type: Date,
@@ -27,20 +28,9 @@ const signUpSchema = new Schema({
     type: String,
     required: true,
   },
-  addresses: {
-    type: Object,
-    home: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Address",
-      },
-    ],
-    office: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Address",
-      },
-    ],
+  address: {
+    type: Schema.Types.ObjectId,
+    ref: "Address",
   },
   is_active: {
     type: Boolean,
@@ -51,6 +41,5 @@ const signUpSchema = new Schema({
   updated_at: Date,
 });
 
-const UserSignup = mongoose.model("UserSignup", signUpSchema);
-
+const UserSignup = mongoose.model("UserSignup", UserSignUpSchema);
 module.exports = UserSignup;
