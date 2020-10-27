@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const {Schema} = mongoose;
 
 const MerchantSignupSchema = new Schema({
     merchant_id: {
