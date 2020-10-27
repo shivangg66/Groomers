@@ -27,7 +27,7 @@ const MerchantSignupSchema = new Schema({
         required: true
     },
     dob: {
-        type: String,
+        type: Date,
         required: true,
     },
     address: {
