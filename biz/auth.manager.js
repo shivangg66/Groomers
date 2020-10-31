@@ -14,8 +14,8 @@ const SCHEMA = require("../constant/schema");
 const MSG = require("../constant/msg");
 
 class AuthManager extends BaseManager {
-  constructor(async_param) {
-    super(async_param);
+  constructor() {
+    super();
     this._authRepository = new AuthRepository();
   }
 
