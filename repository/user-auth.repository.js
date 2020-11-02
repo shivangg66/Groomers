@@ -1,4 +1,4 @@
-const Signup = require("../models/SignUp");
+const Signup = require("../models/merchant-signup");
 
 class AuthRepository {
   async findOne(mobile_number, email_id) {
