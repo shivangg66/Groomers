@@ -61,13 +61,13 @@ class AuthManager extends BaseManager {
             phone_number,
             email_id
           );
-          const { userId, password, isActive } = userData;
+          const { user_id, password, isActive } = userData;
           const match = await bcrypt.compare(pwd, password);
           if (match) {
             //change key and salt rounds
             const accessToken = jwt.sign(
               {
-                user_id: userId,
+                user_id: user_id,
                 is_active: isActive,
               },
               process.env.ACCESS_TOKEN_SECRET,
