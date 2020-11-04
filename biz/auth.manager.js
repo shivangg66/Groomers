@@ -23,10 +23,10 @@ class AuthManager extends BaseManager {
     try {
       const validationResult = this.validate(SCHEMA.USER_SIGNUP, bodyParams);
       if (validationResult.valid) {
-        let { mobile_number, email_id, password } = bodyParams;
+        let { phone_number, email_id, password } = bodyParams;
 
         const checkExist = await this._authRepository.findOne(
-          mobile_number,
+          phone_number,
           email_id
         );
 
@@ -51,14 +51,14 @@ class AuthManager extends BaseManager {
       const validationResult = this.validate(SCHEMA.USER_LOGIN, bodyParams);
 
       if (validationResult.valid) {
-        const { mobile_number, email_id, password: pwd } = bodyParams;
+        const { phone_number, email_id, password: pwd } = bodyParams;
         const checkExist = await this._authRepository.findOne(
-          mobile_number,
+          phone_number,
           email_id
         );
         if (checkExist) {
           const userData = await this._authRepository.findData(
-            mobile_number,
+            phone_number,
             email_id
           );
           const { userId, password, isActive } = userData;
@@ -70,14 +70,14 @@ class AuthManager extends BaseManager {
                 user_id: userId,
                 is_active: isActive,
               },
-              process.env.accessTokenSecret,
+              process.env.ACCESS_TOKEN_SECRET,
               { expiresIn: 1209600 }
             );
             return accessToken;
           }
           throw new UnauthorizedError(MSG.INVALID_CLIENT_CREDENTIALS);
         }
-        throw new NotFound(MSG.RESOURCE_NOT_FOUND);
+        throw new NotFound(MSG.USER_NOT_FOUND);
       }
       throw new ValidationError(MSG.VALIDATION_ERROR, validationResult.errors);
     } catch (err) {

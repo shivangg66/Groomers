@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
+const schemaOptions = {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+};
 const UserSignUpSchema = new Schema({
   user_id: {
     type: String,
@@ -39,7 +42,7 @@ const UserSignUpSchema = new Schema({
   },
   created_at: Date,
   updated_at: Date,
-});
+}, schemaOptions);
 
 const UserSignup = mongoose.model("UserSignup", UserSignUpSchema);
 module.exports = UserSignup;

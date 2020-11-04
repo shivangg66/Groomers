@@ -1,12 +1,12 @@
-const Signup = require("../models/merchant-signup");
+const Signup = require("../models/user-signup");
 
 class AuthRepository {
-  async findOne(mobile_number, email_id) {
+  async findOne(phone_number, email_id) {
     try {
       const q = await Signup.find({
         $and: [
           {
-            $or: [{ mobile_number }, { email_id }],
+            $or: [{ phone_number }, { email_id }],
           },
           {
             is_active: true,
