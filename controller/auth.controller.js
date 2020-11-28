@@ -1,6 +1,7 @@
 'use strict';
 const Controller = require('./base.controller');
 const AuthManager = require('../biz/auth.manager');
+const { MERCHANT_LOGIN } = require('../constant/schema');
 
 
 class Authuser extends Controller {
@@ -12,7 +13,7 @@ class Authuser extends Controller {
 
     async userSignUp(req, res) {
         try {
-            const userSignup = await this._authManager.userSignUp(req.body);
+            const userSignup = await this._authManager.SignUp(req.body, USER_SIGNUP);
             this.ok(res, userSignup)
         } catch (err) {
             this.error(res, err);
@@ -20,7 +21,7 @@ class Authuser extends Controller {
     }
     async userLogin(req, res) {
         try {
-            const userLogin = await this._authManager.userLogin(req.body);
+            const userLogin = await this._authManager.Login(req.body, USER_LOGIN);
             this.ok(res, userLogin)
         } catch (err) {
             this.error(res, err);
@@ -28,7 +29,7 @@ class Authuser extends Controller {
     }
     async merchantSignup(req, res) {
         try{
-            const merchantSignup = await this._authManager.merchantSignup(req.body);
+            const merchantSignup = await this._authManager.Signup(req.body, MERCHANT_SIGNUP);
             this.ok(res, merchantSignup)
         } catch (err) {
             this.error(res, err);
@@ -36,7 +37,7 @@ class Authuser extends Controller {
     }
     async merchnatLogin(req, res) {
         try{
-            const merchnatLogin = await this._authManager.merchnatLogin(req.body);
+            const merchnatLogin = await this._authManager.Login(req.body, MERCHANT_LOGIN);
             this.ok(res, merchnatLogin)
         }catch (err) {
             this.error(res, err);

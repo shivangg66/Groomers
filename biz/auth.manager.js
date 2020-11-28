@@ -19,37 +19,9 @@ class AuthManager extends BaseManager {
     this._authRepository = new AuthRepository();
   }
 
-  async merchantSignup(bodyParams) {
+  async Login(bodyParams, SCHEMA) {
     try{
-      const validationResult = this.validate(SCHEMA.MERCHANT_SIGNUP, bodyParams);
-      if(validationResult.valid) {
-        let {phone_number, email_id, password} = bodyParams;
-
-        const checkExist = await this._authRepository.findOne(
-          phone_number,
-          email_id
-        );
-
-        if(!checkExist) {
-          bodyParams.merchant_id = randomize("Aa0", 5);
-          bodyParams.password = await bcrypt.hash(password, saltRounds);
-          const saveMerchantData = await this._authRepository.saveOne(
-            bodyParams
-          );
-          return saveMerchantData;
-        }
-        throw new DuplicateError(MSG.DUPLICATE_USER);
-      }
-      throw new ValidationError(MSG.VALIDATION_ERROR, validationResult.errors);
-    } catch (err){
-      throw err;
-    }
-  }
-
-  async merchantLogin(bodyParams) {
-    try{
-      const validationResult = this.validate(SCHEMA.MERCHANT_LOGIN, bodyParams);
-
+      const validationResult = this.validate(SCHEMA, bodyParams);
       if(validationResult.valid) {
         const {phone_number, email_id, password: pwd} = bodyParams;
         const checkExist = await this._authRepository.findOne(
@@ -85,9 +57,9 @@ class AuthManager extends BaseManager {
     }
   }
 
-  async userSignUp(bodyParams) {
+  async SignUp(bodyParams, SCHEMA) {
     try {
-      const validationResult = this.validate(SCHEMA.USER_SIGNUP, bodyParams);
+      const validationResult = this.validate(SCHEMA, bodyParams);
       if (validationResult.valid) {
         let { phone_number, email_id, password } = bodyParams;
 
@@ -105,45 +77,6 @@ class AuthManager extends BaseManager {
           return saveUserData;
         }
         throw new DuplicateError(MSG.DUPLICATE_USER);
-      }
-      throw new ValidationError(MSG.VALIDATION_ERROR, validationResult.errors);
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  async userLogin(bodyParams) {
-    try {
-      const validationResult = this.validate(SCHEMA.USER_LOGIN, bodyParams);
-
-      if (validationResult.valid) {
-        const { phone_number, email_id, password: pwd } = bodyParams;
-        const checkExist = await this._authRepository.findOne(
-          phone_number,
-          email_id
-        );
-        if (checkExist) {
-          const userData = await this._authRepository.findData(
-            phone_number,
-            email_id
-          );
-          const { user_id, password, isActive } = userData;
-          const match = await bcrypt.compare(pwd, password);
-          if (match) {
-            //change key and salt rounds
-            const accessToken = jwt.sign(
-              {
-                user_id: user_id,
-                is_active: isActive,
-              },
-              process.env.ACCESS_TOKEN_SECRET,
-              { expiresIn: 1209600 }
-            );
-            return accessToken;
-          }
-          throw new UnauthorizedError(MSG.INVALID_CLIENT_CREDENTIALS);
-        }
-        throw new NotFound(MSG.USER_NOT_FOUND);
       }
       throw new ValidationError(MSG.VALIDATION_ERROR, validationResult.errors);
     } catch (err) {
