@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let appconfig = {}
 appconfig.port = 5000;
-appconfig.db = `mongodb+srv://atharva_2807:test@groomers.z5t4s.mongodb.net/test?retryWrites=true&w=majority`;
+appconfig.db = `mongodb+srv://atharva_2807:test@groomers.z5t4s.mongodb.net/Groomers?retryWrites=true&w=majority`;
 appconfig.mongoconnect = async()=> {
 try{
     await mongoose.connect(appconfig.db)

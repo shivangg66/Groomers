@@ -47,5 +47,5 @@ const MerchantSignupSchema = new Schema({
       updated_at: Date,
 },    schemaOptions);
 
-const MerchantSignup = mongoose.model("MerchantSignup", MerchantSignupSchema)
+const MerchantSignup = mongoose.model("Merchants", MerchantSignupSchema)
 module.exports = MerchantSignup

@@ -44,5 +44,5 @@ const UserSignUpSchema = new Schema({
   updated_at: Date,
 }, schemaOptions);
 
-const UserSignup = mongoose.model("UserSignup", UserSignUpSchema);
+const UserSignup = mongoose.model("Users", UserSignUpSchema);
 module.exports = UserSignup;
