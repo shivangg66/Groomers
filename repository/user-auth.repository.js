@@ -6,7 +6,7 @@ class AuthRepository {
       const q = await Signup.find({
         $and: [
           {
-            $or: [{ "phone_number" : phone_number }, {"email_id" : email_id }],
+            $or: [{phone_number}, {email_id}],
           },
           {
             is_active: true,
@@ -33,9 +33,9 @@ class AuthRepository {
       throw err;
     }
   }
-  async findData(mobile_number, email_id) {
+  async findData(phone_number, email_id) {
     try {
-      const q = await Signup.find({ $or: [{"phone_number" : mobile_number }, {"email_id" : email_id }] })
+      const q = await Signup.find({ $or: [{phone_number}, {email_id}] })
         .lean()
         .exec();
       return q[0];

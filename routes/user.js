@@ -6,6 +6,6 @@ router.get("/", defaultHandler);
 
 // @route POST api/user/registerUser
 // @desc register user
-router.post("/signup", authController.userSignUp);
-router.post("/login", authController.userLogin);
+router.post("/userSignup", authController.userSignUp);
+router.post("/userLogin", authController.userLogin);
 module.exports = router;

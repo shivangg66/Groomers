@@ -12,7 +12,7 @@ class Authuser extends Controller {
 
     async userSignUp(req, res) {
         try {
-            const userSignup = await this._authManager.signUp(req.body);
+            const userSignup = await this._authManager.userSignUp(req.body);
             this.ok(res, userSignup)
         } catch (err) {
             this.error(res, err);
@@ -20,9 +20,25 @@ class Authuser extends Controller {
     }
     async userLogin(req, res) {
         try {
-            const userLogin = await this._authManager.login(req.body);
+            const userLogin = await this._authManager.userLogin(req.body);
             this.ok(res, userLogin)
         } catch (err) {
+            this.error(res, err);
+        }
+    }
+    async merchantSignup(req, res) {
+        try{
+            const merchantSignup = await this._authManager.merchantSignup(req.body);
+            this.ok(res, merchantSignup)
+        } catch (err) {
+            this.error(res, err);
+        }
+    }
+    async merchnatLogin(req, res) {
+        try{
+            const merchnatLogin = await this._authManager.merchnatLogin(req.body);
+            this.ok(res, merchnatLogin)
+        }catch (err) {
             this.error(res, err);
         }
     }

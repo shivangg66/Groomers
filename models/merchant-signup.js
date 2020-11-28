@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
+const schemaOptions = {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  };
+
 const MerchantSignupSchema = new Schema({
     merchant_id: {
         type: String,
@@ -41,7 +45,7 @@ const MerchantSignupSchema = new Schema({
       },
       created_at: Date,
       updated_at: Date,
-})
+},    schemaOptions);
 
 const MerchantSignup = mongoose.model("MerchantSignup", MerchantSignupSchema)
 module.exports = MerchantSignup
