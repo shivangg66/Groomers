@@ -59,7 +59,7 @@ class AuthManager extends BaseManager {
     }
   }
 
-  async SignUp(bodyParams, SCHEMA, model) {
+  async signUp(bodyParams, SCHEMA, model) {
     try {
       const validationResult = this.validate(SCHEMA, bodyParams);
       if (validationResult.valid) {
