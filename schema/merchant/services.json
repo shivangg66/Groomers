@@ -5,9 +5,6 @@
     "description": "This schema contains all the service details",
     "type" :"object",
     "properties": {
-        "service_id":{
-            "type":"string"
-        },
         "merchant_id":{
             "type":"string"
         },
@@ -21,5 +18,5 @@
             "type":"string"
         }
     },
-    "required": ["service_id", "merchant_id", "name", "description", "cost"]
+    "required": ["merchant_id", "name", "description", "cost"]
 }

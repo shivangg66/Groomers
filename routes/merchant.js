@@ -6,12 +6,11 @@ const router = express.Router();
 router.get('/',(req,res)=>res.send('Merchant api'));
 
 //Merchant Login/Signup
-router.post("/merchantSignup", authController.merchnatSignup);
-router.post("/merchantLogin", authController.merchnatLogin);
+router.post("/merchant/signup", authController.merchnatSignup);
+router.post("/merchant/login", authController.merchnatLogin);
 
 //Api for Services
 
 //Adding a new Service
-router.post("/addService", authController.addService);
-
+router.post("/service", authController.addService);
 module.exports = router;
