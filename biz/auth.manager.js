@@ -19,27 +19,29 @@ class AuthManager extends BaseManager {
     this._authRepository = new AuthRepository();
   }
 
-  async Login(bodyParams, SCHEMA) {
+  async login(bodyParams, SCHEMA, model) {
     try{
       const validationResult = this.validate(SCHEMA, bodyParams);
       if(validationResult.valid) {
         const {phone_number, email_id, password: pwd} = bodyParams;
         const checkExist = await this._authRepository.findOne(
+          model,
           phone_number,
           email_id
         );
         if(checkExist) {
-          const merchantData = await this._authRepository.findData(
+          const customerData = await this._authRepository.findData(
+            model,
             phone_number,
             email_id
           );
-          const {merchant_id, password, isActive} = merchantData;
+          const {customer_id, password, isActive} = customerData;
           const match = await bcrypt.compare(pwd, password);
           if (match) {
             //change key and salt rounds
             const accessToken = jwt.sign(
               {
-                merchant_id: merchant_id,
+                customer_id: customer_id,
                 is_active: isActive,
               },
               process.env.ACCESS_TOKEN_SECRET,
@@ -57,24 +59,26 @@ class AuthManager extends BaseManager {
     }
   }
 
-  async SignUp(bodyParams, SCHEMA) {
+  async SignUp(bodyParams, SCHEMA, model) {
     try {
       const validationResult = this.validate(SCHEMA, bodyParams);
       if (validationResult.valid) {
         let { phone_number, email_id, password } = bodyParams;
 
         const checkExist = await this._authRepository.findOne(
+          model,
           phone_number,
           email_id
         );
 
         if (!checkExist) {
-          bodyParams.user_id = randomize("Aa0", 5);
+          bodyParams.customer_id = randomize("Aa0", 5);
           bodyParams.password = await bcrypt.hash(password, saltRounds);
-          const saveUserData = await this._authRepository.saveOne(
+          const saveCustomerData = await this._authRepository.saveOne(
+            model,
             bodyParams
           );
-          return saveUserData;
+          return saveCustomerData;
         }
         throw new DuplicateError(MSG.DUPLICATE_USER);
       }

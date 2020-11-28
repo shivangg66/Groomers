@@ -1,9 +1,9 @@
-const Signup = require("../models/user-signup");
+const model = require("../constant/model");
 
 class AuthRepository {
-  async findOne(phone_number, email_id) {
+  async findOne(model, phone_number, email_id) {
     try {
-      const q = await Signup.find({
+      const q = await model.find({
         $and: [
           {
             $or: [{phone_number}, {email_id}],
@@ -24,18 +24,18 @@ class AuthRepository {
       throw err;
     }
   }
-  async saveOne(bodyParams) {
+  async saveOne(model, bodyParams) {
     try {
-      let newUser = new Signup(bodyParams);
+      let newUser = new model(bodyParams);
       const q = await newUser.save();
       return q;
     } catch (err) {
       throw err;
     }
   }
-  async findData(phone_number, email_id) {
+  async findData(model, phone_number, email_id) {
     try {
-      const q = await Signup.find({ $or: [{phone_number}, {email_id}] })
+      const q = await model.find({ $or: [{phone_number}, {email_id}] })
         .lean()
         .exec();
       return q[0];
