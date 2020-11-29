@@ -108,16 +108,12 @@ class AuthManager extends BaseManager {
 
   async updateService(bodyParams, model){
     try{
+      let { service_id, name, description, cost } = bodyParams;
       const checkExist = await this._authRepository.findOne(
-        bodyParams.service_id
+        service_id
       );
       if(checkExist){
-        const updates = {
-          name: bodyParams.name,
-          description: bodyParams.description,
-          cost: bodyParams.cost
-        };
-        model.findOneAndUpdate(bodyParams.service_id, updates, {new: true}, function(err, model){
+        model.findOneAndUpdate(service_id, {name, description, cost}, {new: true}, function(err, model){
           if(err){
             throw err;
           }
@@ -125,6 +121,7 @@ class AuthManager extends BaseManager {
         })
       }
       throw new NotFound(MSG.USER_NOT_FOUND)
+
       }
     catch (err){
       throw err;
