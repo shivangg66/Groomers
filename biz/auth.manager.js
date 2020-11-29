@@ -108,24 +108,27 @@ class AuthManager extends BaseManager {
 
   async updateService(bodyParams, model){
     try{
-      let { service_id, name, description, cost } = bodyParams;
-      const checkExist = await this._authRepository.findOne(
-        service_id
-      );
-      if(checkExist){
-        model.findOneAndUpdate(service_id, {name, description, cost}, {new: true}, function(err, model){
-          if(err){
-            throw err;
-          }
-          return model;
-        })
-      }
-      throw new NotFound(MSG.USER_NOT_FOUND)
-
-      }
-    catch (err){
-      throw err;
+      const validationResult = this.validate(SCHEMA.SERVICES);
+      if(validationResult.valid){
+        let { service_id, name, description, cost } = bodyParams;
+        const checkExist = await this._authRepository.findOne(
+          service_id
+        );
+        if(checkExist){
+          const updatedServices = await this._authRepository.findOneAndUpdate(
+          model,
+          bodyParams
+          );
+          return updatedServices;
+        }
+        throw new NotFound(MSG.USER_NOT_FOUND)
     }
+    throw new ValidationError(MSG.VALIDATION_ERROR);
+  }
+      catch (err){
+        throw err;
+      }
+     
   }
 }
 

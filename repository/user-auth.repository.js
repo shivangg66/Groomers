@@ -24,6 +24,20 @@ class AuthRepository {
       throw err;
     }
   }
+  async findOneAndUpdate(model, bodyParams){
+    try{
+      const q = await model.findOneAndUpdate(service_id, bodyParams, {new: true}, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return q;
+    }catch(err) {
+      throw err;
+    }
+  }
+
   async saveOne(model, bodyParams) {
     try {
       let newCreated = new model(bodyParams);
