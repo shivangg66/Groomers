@@ -4,12 +4,10 @@ const {Schema} = mongoose;
 const ServiceSchema = new Schema({
     merchant_id: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     service_id: {
         type: String,
-        required: true,
         unique: true
     },
     name: {

@@ -13,7 +13,7 @@ const randomize = require("randomatic");
 const SCHEMA = require("../constant/schema");
 const MSG = require("../constant/msg");
 const model = require("../constant/model");
-const { findByIdAndUpdate, update } = require("../models/services");
+const { USER_NOT_FOUND } = require("../constant/msg");
 
 class AuthManager extends BaseManager {
   constructor() {
@@ -108,18 +108,23 @@ class AuthManager extends BaseManager {
 
   async updateService(bodyParams, model){
     try{
-      const id = bodyParams.service_id;
-      const updates = {
-        name: bodyParams.name,
-        description: bodyParams.description,
-        cost: bodyParams.cost
-      };
-      model.findOneAndUpdate(id, updates, {new: true}, function(err, model){
-        if(err){
-          throw err;
-        }
-        return model;
-      })
+      const checkExist = await this._authRepository.findOne(
+        bodyParams.service_id
+      );
+      if(checkExist){
+        const updates = {
+          name: bodyParams.name,
+          description: bodyParams.description,
+          cost: bodyParams.cost
+        };
+        model.findOneAndUpdate(bodyParams.service_id, updates, {new: true}, function(err, model){
+          if(err){
+            throw err;
+          }
+          return model;
+        })
+      }
+      throw new NotFound(MSG.USER_NOT_FOUND)
       }
     catch (err){
       throw err;

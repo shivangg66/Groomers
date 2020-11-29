@@ -14,7 +14,7 @@ class Authuser extends Controller {
 
     async userSignUp(req, res) {
         try {
-            const userSignup = await this._authManager.SignUp(req.body, USER_SIGNUP, USER);
+            const userSignup = await this._authManager.signUp(req.body, USER_SIGNUP, USER);
             this.ok(res, userSignup)
         } catch (err) {
             this.error(res, err);
