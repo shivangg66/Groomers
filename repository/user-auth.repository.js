@@ -26,8 +26,8 @@ class AuthRepository {
   }
   async saveOne(model, bodyParams) {
     try {
-      let newUser = new model(bodyParams);
-      const q = await newUser.save();
+      let newCreated = new model(bodyParams);
+      const q = await newCreated.save();
       return q;
     } catch (err) {
       throw err;

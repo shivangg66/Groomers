@@ -12,6 +12,8 @@ const jwt = require("jsonwebtoken");
 const randomize = require("randomatic");
 const SCHEMA = require("../constant/schema");
 const MSG = require("../constant/msg");
+const model = require("../constant/model");
+const { findByIdAndUpdate, update } = require("../models/services");
 
 class AuthManager extends BaseManager {
   constructor() {
@@ -84,6 +86,42 @@ class AuthManager extends BaseManager {
       }
       throw new ValidationError(MSG.VALIDATION_ERROR, validationResult.errors);
     } catch (err) {
+      throw err;
+    }
+  }
+
+  async addService(bodyParams, model){
+    try{
+      const validationResult = this.validate(SCHEMA.SERVICES);
+      if(validationResult.valid){
+        bodyParams.service_id = randomize("Aa0", 4);
+        const serviceAdded = await this._authRepository.saveOne(
+          model
+        );
+        return serviceAdded;
+      }
+      throw new ValidationError(MSG.VALIDATION_ERROR)
+    }catch (err){
+      throw err;
+    }
+  }
+
+  async updateService(bodyParams, model){
+    try{
+      const id = bodyParams.service_id;
+      const updates = {
+        name: bodyParams.name,
+        description: bodyParams.description,
+        cost: bodyParams.cost
+      };
+      model.findOneAndUpdate(id, updates, {new: true}, function(err, model){
+        if(err){
+          throw err;
+        }
+        return model;
+      })
+      }
+    catch (err){
       throw err;
     }
   }

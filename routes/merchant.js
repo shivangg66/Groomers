@@ -13,4 +13,6 @@ router.post("/merchant/login", authController.merchnatLogin);
 
 //Adding a new Service
 router.post("/service", authController.addService);
+//Updating a Service
+router.put("/service", authController.updateService);
 module.exports = router;

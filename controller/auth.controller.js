@@ -2,7 +2,7 @@
 const Controller = require('./base.controller');
 const AuthManager = require('../biz/auth.manager');
 const { MERCHANT_LOGIN, MERCHANT_SIGNUP, USER_LOGIN, USER_SIGNUP } = require('../constant/schema');
-const { USER, MERCHANT } = require('../constant/model');
+const { USER, MERCHANT, SERVICE } = require('../constant/model');
 
 
 class Authuser extends Controller {
@@ -30,7 +30,7 @@ class Authuser extends Controller {
     }
     async merchantSignup(req, res) {
         try{
-            const merchantSignup = await this._authManager.Signup(req.body, MERCHANT_SIGNUP, MERCHANT);
+            const merchantSignup = await this._authManager.signUp(req.body, MERCHANT_SIGNUP, MERCHANT);
             this.ok(res, merchantSignup)
         } catch (err) {
             this.error(res, err);
@@ -41,6 +41,24 @@ class Authuser extends Controller {
             const merchnatLogin = await this._authManager.login(req.body, MERCHANT_LOGIN, MERCHANT);
             this.ok(res, merchnatLogin)
         }catch (err) {
+            this.error(res, err);
+        }
+    }
+
+    async addService(req, res){
+        try{
+            const addingService = await this._authManager.addService(req.body, SERVICE);
+            this.ok(res, addingService)
+        }catch (err){
+            this.error(res, err);
+        }
+    }
+
+    async updateService(req, res){
+        try{
+            const updatingService = await this._authManager.updateService(req.body, SERVICE);
+            this.ok(res, updatingService)
+        }catch (err){
             this.error(res, err);
         }
     }
