@@ -26,7 +26,8 @@ class AuthRepository {
   }
   async findOneAndUpdate(model, bodyParams){
     try{
-      const q = await model.findOneAndUpdate(service_id, bodyParams, {new: true}, function(err){
+      const { service_id } = bodyParams;
+      const q = await model.findOneAndUpdate({ service_id }, bodyParams, {new: true}, function(err){
         if(err){
           throw err;
         }

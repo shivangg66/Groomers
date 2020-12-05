@@ -110,7 +110,7 @@ class AuthManager extends BaseManager {
     try{
       const validationResult = this.validate(SCHEMA.SERVICES);
       if(validationResult.valid){
-        let { service_id, name, description, cost } = bodyParams;
+        let { service_id } = bodyParams;
         const checkExist = await this._authRepository.findOne(
           service_id
         );
