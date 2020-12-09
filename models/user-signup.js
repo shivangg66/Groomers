@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const { Schema } = mongoose;
+const Address = require('./address');
 
 const schemaOptions = {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
@@ -30,10 +31,7 @@ const UserSignUpSchema = new Schema({
     type: String,
     required: true,
   },
-  address: {
-    type: Schema.Types.ObjectId,
-    ref: "Address",
-  },
+  address: Address,
   is_active: {
     type: Boolean,
     required: true,
