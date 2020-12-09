@@ -1,18 +1,17 @@
 const express = require('express');
-const { authController, defaultHandler } = require("../controller");
+const AuthController = require("../controller/auth.controller");
 const router = express.Router();
 
-//Dummy Api
-router.get("/", defaultHandler);
+
 
 //Merchant Login/Signup
-router.post("/signup", authController.merchnatSignup);
-router.post("/login", authController.merchnatLogin);
+router.post("/signup", new AuthController().merchantSignup);
+router.post("/login", new AuthController().merchantLogin);
 
 //Api for Services
 
 //Adding a new Service
-router.post("/addservice", authController.addService);
+router.post("/addservice", new AuthController().addService);
 //Updating a Service
-router.put("/service", authController.updateService);
+router.put("/service", new AuthController().updateService);
 module.exports = router;
