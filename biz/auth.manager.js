@@ -92,11 +92,11 @@ class AuthManager extends BaseManager {
 
   async addService(bodyParams, model){
     try{
-      const validationResult = this.validate(SCHEMA.SERVICES);
+      const validationResult = this.validate(SCHEMA.SERVICES, bodyParams);
       if(validationResult.valid){
         bodyParams.service_id = randomize("Aa0", 4);
         const serviceAdded = await this._authRepository.saveOne(
-          model
+          model, bodyParams
         );
         return serviceAdded;
       }
