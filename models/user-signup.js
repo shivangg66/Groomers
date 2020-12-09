@@ -5,9 +5,8 @@ const schemaOptions = {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 };
 const UserSignUpSchema = new Schema({
-  customer_id: {
+  user_id: {
     type: String,
-    required: true,
     index: true,
   },
   name: {

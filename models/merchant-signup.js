@@ -6,7 +6,7 @@ const schemaOptions = {
   };
 
 const MerchantSignupSchema = new Schema({
-    customer_id: {
+    merchant_id: {
         type: String,
         required: true,
         index: true,

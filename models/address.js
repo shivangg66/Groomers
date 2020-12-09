@@ -25,7 +25,7 @@ district: {
     required: true
 },
 pin_code: {
-    type: Number,
+    type: String,
     required: true
 },
 country: {

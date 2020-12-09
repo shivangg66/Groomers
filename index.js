@@ -15,6 +15,7 @@ config.mongoconnect();
 //DEFINE ROUTES
 app.use("/api/user", require("./routes/user"));
 app.use("/api/merchant", require("./routes/merchant"));
+app.use("/api/services", require("./routes/merchant"));
 
 //START SERVER
 const PORT = process.env.PORT || config.port;
