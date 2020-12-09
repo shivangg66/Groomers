@@ -24,6 +24,15 @@ class AuthRepository {
       throw err;
     }
   }
+
+  async find(model){
+    try{
+      const q = await model.find({}).lean().exec()
+      return q;
+    }catch(err){
+      throw err;
+    }
+  }
   async findOneAndUpdate(model, bodyParams){
     try{
       const { service_id } = bodyParams;
@@ -35,6 +44,21 @@ class AuthRepository {
       .exec()
       return q;
     }catch(err) {
+      throw err;
+    }
+  }
+
+  async findOneAndDelete(model, bodyParams){
+    try{
+      const { service_id } = bodyParams;
+      const q = await model.findOneAndDelete({ service_id }, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return q;
+    }catch(err){
       throw err;
     }
   }

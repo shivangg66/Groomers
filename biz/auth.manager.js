@@ -106,6 +106,36 @@ class AuthManager extends BaseManager {
     }
   }
 
+  async deleteService(bodyParams, model){
+    try{
+      let { service_id } = bodyParams;
+      const checkExist = await this._authRepository.findOne(
+        service_id
+      );
+      if(checkExist){
+        const deletedService = await this._authRepository.findOneAndDelete(
+          model,
+          bodyParams
+        );
+        return deletedService;
+      }
+      throw new NotFound(MSG.USER_NOT_FOUND);
+    }catch (err){
+      throw err;
+    }
+  }
+
+  async findServices(model){
+    try{
+      const allServices = await this._authRepository.find(
+        model
+      );
+      return allServices;
+    }catch(err){
+      throw err;
+    }
+  }
+
   async updateService(bodyParams, model){
     try{
       const validationResult = this.validate(SCHEMA.SERVICES);

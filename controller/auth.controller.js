@@ -62,6 +62,24 @@ class Authuser extends Controller {
             this.error(res, err);
         }
     }
+
+    async deleteService(req, res){
+        try{
+            const deletingService = await this._authManager.deleteService(req.body, SERVICE);
+            this.ok(res, deletingService)
+        }catch(err){
+            this.error(res, err);
+        }
+    }
+
+    async findAllServices(req, res){
+        try{
+            const allServices = await this._authManager.findServices(SERVICE);
+            this.ok(res, allServices)
+        }catch(err){
+            this.error(res, err);
+        }
+    }
 }
 
 
