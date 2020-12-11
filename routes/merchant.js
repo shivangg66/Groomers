@@ -11,7 +11,11 @@ router.post("/login", new AuthController().merchantLogin);
 //Api for Services
 
 //Adding a new Service
-router.post("/addservice", new AuthController().addService);
+router.post("/service", new AuthController().addService);
 //Updating a Service
 router.put("/service", new AuthController().updateService);
+//Deleting a service
+router.delete("/service", new AuthController().deleteService);
+//Retrieving a service
+router.get("/service", new AuthController().findAllServices);
 module.exports = router;
