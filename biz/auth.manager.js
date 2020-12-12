@@ -109,9 +109,7 @@ class AuthManager extends BaseManager {
   async deleteService(bodyParams, model){
     try{
       let { service_id } = bodyParams;
-      const checkExist = await this._authRepository.findOne(
-        service_id
-      );
+      const checkExist = await model.exists({service_id});
       if(checkExist){
         const deletedService = await this._authRepository.findOneAndDelete(
           model,
@@ -138,12 +136,10 @@ class AuthManager extends BaseManager {
 
   async updateService(bodyParams, model){
     try{
-      const validationResult = this.validate(SCHEMA.SERVICES);
+      let { service_id } = bodyParams;
+      const validationResult = this.validate(SCHEMA.SERVICES, bodyParams);
       if(validationResult.valid){
-        let { service_id } = bodyParams;
-        const checkExist = await this._authRepository.findOne(
-          service_id
-        );
+        const checkExist = await model.exists({service_id});
         if(checkExist){
           const updatedServices = await this._authRepository.findOneAndUpdate(
           model,

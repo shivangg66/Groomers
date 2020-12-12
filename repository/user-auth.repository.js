@@ -1,4 +1,5 @@
 const model = require("../constant/model");
+const msg = require("../constant/msg");
 
 class AuthRepository {
   async findOne(model, phone_number, email_id) {
@@ -57,7 +58,7 @@ class AuthRepository {
         }
       }).lean()
       .exec()
-      return q;
+      return msg.SERVICE_DELETED;
     }catch(err){
       throw err;
     }
