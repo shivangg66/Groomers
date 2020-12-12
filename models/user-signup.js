@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const { Schema } = mongoose;
+const Address = require('./address');
 
 const schemaOptions = {
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 };
 const UserSignUpSchema = new Schema({
-  user_id: {
+  customer_id: {
     type: String,
-    required: true,
     index: true,
   },
   name: {
@@ -31,10 +31,7 @@ const UserSignUpSchema = new Schema({
     type: String,
     required: true,
   },
-  address: {
-    type: Schema.Types.ObjectId,
-    ref: "Address",
-  },
+  address: Address,
   is_active: {
     type: Boolean,
     required: true,
@@ -44,5 +41,5 @@ const UserSignUpSchema = new Schema({
   updated_at: Date,
 }, schemaOptions);
 
-const UserSignup = mongoose.model("UserSignup", UserSignUpSchema);
+const UserSignup = mongoose.model("Users", UserSignUpSchema);
 module.exports = UserSignup;

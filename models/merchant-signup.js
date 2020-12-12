@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const { Schema } = mongoose;
+const Address = require('./address');
+
+const schemaOptions = {
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+};
 
 const MerchantSignupSchema = new Schema({
-    merchant_id: {
+    customer_id: {
         type: String,
         required: true,
         index: true,
@@ -30,18 +35,15 @@ const MerchantSignupSchema = new Schema({
         type: Date,
         required: true,
     },
-    address: {
-        type: Schema.Types.ObjectId,
-        ref: "Address",
-    },
+    address: Address,
     is_active: {
         type: Boolean,
         required: true,
         default: true,
-      },
-      created_at: Date,
-      updated_at: Date,
-})
+    },
+    created_at: Date,
+    updated_at: Date,
+}, schemaOptions);
 
-const MerchantSignup = mongoose.model("MerchantSignup", MerchantSignupSchema)
+const MerchantSignup = mongoose.model("Merchants", MerchantSignupSchema)
 module.exports = MerchantSignup

@@ -3,7 +3,8 @@
 class ErrorManager {
 
     static get(msg) {
-        if (!msg) {
+        try{
+            if (!msg) {
             throw new Error('msg argument is required to set the error.');
         }
         const result = {
@@ -13,8 +14,13 @@ class ErrorManager {
             result['errors'] = msg.errors;
             return result;
         }
+    
         return result;
+    }catch(err){
+        return err;
     }
+}
+    
 }
 
 module.exports = ErrorManager;

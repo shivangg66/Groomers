@@ -1,12 +1,13 @@
-const Signup = require("../models/user-signup");
+const model = require("../constant/model");
+const msg = require("../constant/msg");
 
 class AuthRepository {
-  async findOne(phone_number, email_id) {
+  async findOne(model, phone_number, email_id) {
     try {
-      const q = await Signup.find({
+      const q = await model.find({
         $and: [
           {
-            $or: [{ "phone_number" : phone_number }, {"email_id" : email_id }],
+            $or: [{phone_number}, {email_id}],
           },
           {
             is_active: true,
@@ -24,18 +25,57 @@ class AuthRepository {
       throw err;
     }
   }
-  async saveOne(bodyParams) {
+
+  async find(model){
+    try{
+      const q = await model.find({}).lean().exec()
+      return q;
+    }catch(err){
+      throw err;
+    }
+  }
+  async findOneAndUpdate(model, bodyParams){
+    try{
+      const { service_id } = bodyParams;
+      const q = await model.findOneAndUpdate({ service_id }, bodyParams, {new: true}, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return q;
+    }catch(err) {
+      throw err;
+    }
+  }
+
+  async findOneAndDelete(model, bodyParams){
+    try{
+      const { service_id } = bodyParams;
+      const q = await model.findOneAndDelete({ service_id }, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return msg.SERVICE_DELETED;
+    }catch(err){
+      throw err;
+    }
+  }
+
+  async saveOne(model, bodyParams) {
     try {
-      let newUser = new Signup(bodyParams);
-      const q = await newUser.save();
+      let newCreated = new model(bodyParams);
+      const q = await newCreated.save();
       return q;
     } catch (err) {
       throw err;
     }
   }
-  async findData(mobile_number, email_id) {
+  async findData(model, phone_number, email_id) {
     try {
-      const q = await Signup.find({ $or: [{"phone_number" : mobile_number }, {"email_id" : email_id }] })
+      const q = await model.find({ $or: [{phone_number}, {email_id}] })
         .lean()
         .exec();
       return q[0];

@@ -48,7 +48,7 @@
               "type": "string"
           },
           "pin_code": {
-              "type": "number"
+              "type": "string"
           },
           "country": {
               "type": "string"
