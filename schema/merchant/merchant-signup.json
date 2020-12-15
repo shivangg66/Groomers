@@ -26,35 +26,72 @@
             "type": "string",
             "format": "date"
         },
-        "address": {
+        "company_details": {
             "type": "object",
             "properties": {
-                "street1": {
+                "name": {
                     "type": "string"
                 },
-                "street2": {
-                    "type": "string"
+                "location": {
+                    "type": "object",
+                    "properties": {
+                        "latitude": {
+                            "type":"number",
+                            "minimum": -90,
+                            "maximum": 90
+                        },
+                        "longitude": {
+                            "type":"number",
+                            "minimum": -180,
+                            "maximum": 180
+                        }
+                    }
                 },
-                "street3": {
-                    "type": "string"
+                "phone_number": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "minLength": 10
                 },
-                "city": {
-                    "type": "string"
+                "address": {
+                    "type": "object",
+                    "properties": {
+                        "street1": {
+                            "type": "string"
+                        },
+                        "street2": {
+                            "type": "string"
+                        },
+                        "street3": {
+                            "type": "string"
+                        },
+                        "city": {
+                            "type": "string"
+                        },
+                        "state": {
+                            "type": "string"
+                        },
+                        "district": {
+                            "type": "string"
+                        },
+                        "pin_code": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["street1", "city", "state", "district", "pin_code", "country"]
                 },
-                "state": {
-                    "type": "string"
+                "email_id": {
+                    "type": "string",
+                    "format": "email"
                 },
-                "district": {
-                    "type": "string"
-                },
-                "pin_code": {
-                    "type": "string"
-                },
-                "country": {
+                "description": {
                     "type": "string"
                 }
+
             },
-            "required": ["street1", "city", "state", "district", "pin_code", "country"]
+            "required": ["name", "location", "phone_number", "address", "email_id"]
         },
         "is_active": {
             "type": "boolean"

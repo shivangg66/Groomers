@@ -35,7 +35,6 @@ const MerchantSignupSchema = new Schema({
         type: Date,
         required: true,
     },
-    address: Address,
     is_active: {
         type: Boolean,
         required: true,
