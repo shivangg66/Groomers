@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const Address = require('./address');
+const CompanyDetails = require("./company-details"); 
 
 const schemaOptions = {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
@@ -35,6 +36,7 @@ const MerchantSignupSchema = new Schema({
         type: Date,
         required: true,
     },
+    company_details: CompanyDetails,
     is_active: {
         type: Boolean,
         required: true,
