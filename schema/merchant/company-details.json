@@ -29,7 +29,34 @@
             "minLength": 10
         },
         "address": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                },
+                "street3": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "district": {
+                    "type": "string"
+                },
+                "pin_code": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            },
+            "required": ["street1", "city", "state", "district", "pin_code", "country"]
         },
         "email_id": {
             "type": "string",
@@ -37,6 +64,16 @@
         },
         "description": {
             "type": "string"
-        }
-    }
+        },
+        "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+    },
+    "required": ["name", "phone_number", "email_id", "location", "", "address"]
 }
