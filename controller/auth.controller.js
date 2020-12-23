@@ -80,6 +80,14 @@ class AuthController extends Controller {
             this.error(res, err);
         }
     }
+
+    updateCompanyDetails = async (req, res) => {
+        try{
+            const updateCompanyDetails = await this._authManager.UpdateCompanyDetails(req.body, require())
+        } catch (err) {
+            this.error(res, err);
+        }
+    }
 }
 
 
