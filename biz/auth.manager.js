@@ -177,6 +177,18 @@ class AuthManager extends BaseManager {
       throw err;
     }
   }
+
+  async findAllCOmpanyDetails(bodyParams, model){
+    try{
+      const allCompanyDetails = await this._authRepository.find(
+        model
+      );
+      return allCompanyDetails;
+    }
+    catch (err){
+      throw err;
+    }
+  }
 }
 
 module.exports = AuthManager;

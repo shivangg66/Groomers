@@ -21,4 +21,5 @@ router.get("/service", new AuthController().findAllServices);
 
 //Api for Company Details
 router.put("/companydetails", new AuthController().updateCompanyDetails);
+router.get("/companydetails", new AuthController().findAllCompanyDetails);
 module.exports = router;
