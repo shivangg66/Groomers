@@ -3,5 +3,6 @@ module.exports = {
   USER_LOGIN: "/schema/user/user-login.json",
   MERCHANT_LOGIN: "/schema/merchant/merchant-login.json",
   MERCHANT_SIGNUP: "/schema/merchant/merchant-signup.json",
-  SERVICES: "/schema/merchant/services.json"
+  SERVICES: "/schema/merchant/services.json",
+  COMPANY_DETAILS: "/schema/merchant/company-details.json"
 };

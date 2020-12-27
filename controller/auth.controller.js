@@ -81,17 +81,10 @@ class AuthController extends Controller {
         }
     }
 
-<<<<<<< HEAD
     updateCompanyDetails = async (req, res) => {
-        try{
-            const updateCompanyDetails = await this._authManager.UpdateCompanyDetails(req.body, require())
-        } catch (err) {
-=======
-    addCompanyDetails = async (req, res) => {
         try {
-            const addingCompanyDetails = await this._authManager.addCompanyDetails(req.body, require(COMPANY))
+            const updatingCompanyDetails = await this._authManager.updateCompanyDetails(req.body, require(MERCHANT))
         } catch (err){
->>>>>>> 265c071b6f90d2dadc7338708d68abc9d8cffb49
             this.error(res, err);
         }
     }

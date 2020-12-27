@@ -156,6 +156,27 @@ class AuthManager extends BaseManager {
       }
      
   }
+  async updateCompanyDetails(bodyParams, model){
+    try{
+      let { customer_id } = bodyParams;
+      const validationResult = this.validate(SCHEMA.COMPANY_DETAILS, bodyParams);
+      if(validationResult.valid){
+        const checkExist = await model.exists({customer_id});
+        if(checkExist){
+          const updatedCompanyDetails = await this._authRepository.findOneAndUpdate(
+            model,
+            bodyParams
+          );
+          return updatedCompanyDetails;
+        }
+        throw  new NotFound(MSG.USER_NOT_FOUND);
+      }
+      throw new ValidationError(MSG.VALIDATION_ERROR)
+    } 
+    catch (err){
+      throw err;
+    }
+  }
 }
 
 module.exports = AuthManager;
