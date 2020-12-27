@@ -163,7 +163,7 @@ class AuthManager extends BaseManager {
       if(validationResult.valid){
         const checkExist = await model.exists({customer_id});
         if(checkExist){
-          const updatedCompanyDetails = await this._authRepository.findOneAndUpdate(
+          const updatedCompanyDetails = await this._authRepository.updateDetails(
             model,
             bodyParams
           );

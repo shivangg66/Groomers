@@ -73,6 +73,7 @@ class AuthRepository {
       throw err;
     }
   }
+
   async findData(model, phone_number, email_id) {
     try {
       const q = await model.find({ $or: [{phone_number}, {email_id}] })
@@ -80,6 +81,21 @@ class AuthRepository {
         .exec();
       return q[0];
     } catch (err) {
+      throw err;
+    }
+  }
+
+  async updateDetails(model, bodyParams){
+    try{
+      const { customer_id } = bodyParams;
+      const q = await model.findOneAndUpdate({ customer_id }, bodyParams, {new: true}, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return q;
+    }catch(err) {
       throw err;
     }
   }
