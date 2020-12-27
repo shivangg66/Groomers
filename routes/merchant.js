@@ -18,4 +18,8 @@ router.put("/service", new AuthController().updateService);
 router.delete("/service", new AuthController().deleteService);
 //Retrieving a service
 router.get("/service", new AuthController().findAllServices);
+
+//Api for Company Details
+router.post("/companydetails", new AuthController().addCompanyDetails);
+router.get("/companydetails", new AuthController().findCompanyDetails);
 module.exports = router;

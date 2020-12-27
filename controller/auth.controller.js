@@ -2,7 +2,7 @@
 const Controller = require('./base.controller');
 const AuthManager = require('../biz/auth.manager');
 const { MERCHANT_LOGIN, MERCHANT_SIGNUP, USER_LOGIN, USER_SIGNUP } = require('../constant/schema');
-const { USER, MERCHANT, SERVICE } = require('../constant/model');
+const { USER, MERCHANT, SERVICE, COMPANY } = require('../constant/model');
 
 
 class AuthController extends Controller {
@@ -81,10 +81,17 @@ class AuthController extends Controller {
         }
     }
 
+<<<<<<< HEAD
     updateCompanyDetails = async (req, res) => {
         try{
             const updateCompanyDetails = await this._authManager.UpdateCompanyDetails(req.body, require())
         } catch (err) {
+=======
+    addCompanyDetails = async (req, res) => {
+        try {
+            const addingCompanyDetails = await this._authManager.addCompanyDetails(req.body, require(COMPANY))
+        } catch (err){
+>>>>>>> 265c071b6f90d2dadc7338708d68abc9d8cffb49
             this.error(res, err);
         }
     }
