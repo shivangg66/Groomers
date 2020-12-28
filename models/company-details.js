@@ -5,13 +5,12 @@ module.exports = {
         required: true
     },
     location: {
-        type: {
+        latitude: {
             type: String,
-            enum: ['Point'],
             required: true 
         },
-        coordinates: {
-            type: [Number],
+        longitude: {
+            type: String,
             required: true
         }
     },

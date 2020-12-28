@@ -2,7 +2,7 @@
 const Controller = require('./base.controller');
 const AuthManager = require('../biz/auth.manager');
 const { MERCHANT_LOGIN, MERCHANT_SIGNUP, USER_LOGIN, USER_SIGNUP } = require('../constant/schema');
-const { USER, MERCHANT, SERVICE } = require('../constant/model');
+const { USER, MERCHANT, SERVICE, COMPANY } = require('../constant/model');
 
 
 class AuthController extends Controller {
@@ -77,6 +77,24 @@ class AuthController extends Controller {
             const allServices = await this._authManager.findServices(require(SERVICE));
             this.ok(res, allServices)
         } catch (err) {
+            this.error(res, err);
+        }
+    }
+
+    updateCompanyDetails = async (req, res) => {
+        try {
+            const updatingCompanyDetails = await this._authManager.updateCompanyDetails(req.body, require(MERCHANT));
+            this.ok(res, updatingCompanyDetails)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
+
+    findAllCompanyDetails = async (req, res) => {
+        try{
+            const findCompanyDetails = await this._authManager.findAllCompanyDetails(require(MERCHANT));
+            this.ok(res, findCompanyDetails)
+        } catch (err){
             this.error(res, err);
         }
     }
