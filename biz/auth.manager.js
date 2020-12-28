@@ -178,7 +178,7 @@ class AuthManager extends BaseManager {
     }
   }
 
-  async findAllCOmpanyDetails(bodyParams, model){
+  async findAllCompanyDetails(bodyParams, model){
     try{
       const allCompanyDetails = await this._authRepository.find(
         model
