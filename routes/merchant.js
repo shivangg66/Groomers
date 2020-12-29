@@ -22,4 +22,7 @@ router.get("/service", new AuthController().findAllServices);
 //Api for Company Details
 router.put("/companydetails", new AuthController().updateCompanyDetails);
 router.get("/companydetails", new AuthController().findAllCompanyDetails);
+
+//Api for GET appointment
+router.get("/appointment", new AuthController().findAllApointment);
 module.exports = router;

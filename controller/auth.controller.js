@@ -2,7 +2,7 @@
 const Controller = require('./base.controller');
 const AuthManager = require('../biz/auth.manager');
 const { MERCHANT_LOGIN, MERCHANT_SIGNUP, USER_LOGIN, USER_SIGNUP } = require('../constant/schema');
-const { USER, MERCHANT, SERVICE, COMPANY } = require('../constant/model');
+const { USER, MERCHANT, SERVICE, COMPANY, APPOINTMENT } = require('../constant/model');
 
 
 class AuthController extends Controller {
@@ -83,7 +83,7 @@ class AuthController extends Controller {
 
     updateCompanyDetails = async (req, res) => {
         try {
-            const updatingCompanyDetails = await this._authManager.updateCompanyDetails(req.body, require(MERCHANT));
+            const updatingCompanyDetails = await this._authManager.updateCompanyDetails(req.body, require(COMPANY));
             this.ok(res, updatingCompanyDetails)
         } catch (err){
             this.error(res, err);
@@ -92,8 +92,44 @@ class AuthController extends Controller {
 
     findAllCompanyDetails = async (req, res) => {
         try{
-            const findCompanyDetails = await this._authManager.findAllCompanyDetails(require(MERCHANT));
+            const findCompanyDetails = await this._authManager.findAllCompanyDetails(require(COMPANY));
             this.ok(res, findCompanyDetails)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
+
+    addAppointment = async (req, res) => {
+        try{
+            const addAppointment = await this._authManager.addAppointment(req.body, require(APPOINTMENT));
+            this.ok(res, addAppointment)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
+
+    deleteAppointment = async (req, res) => {
+        try{
+            const deleteAppointment = await this._authManager.deleteAppointment(req.body, require(APPOINTMENT))
+            this.ok(res, deleteAppointment)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
+
+    updateAppointment = async (req, res) => {
+        try{
+            const updateAppointment = await this._authManager.upadateAppointment(req.body, require(APPOINTMENT))
+            this.ok(res, updateAppointment)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
+
+    findAllApointment = async (req, res) => {
+        try{
+            const findAllAppointment = await this._authManager.findAllAppointment(require(APPOINTMENT))
+            this.ok(res, findAllAppointment)
         } catch (err){
             this.error(res, err);
         }
