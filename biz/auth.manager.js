@@ -14,6 +14,7 @@ const SCHEMA = require("../constant/schema");
 const MSG = require("../constant/msg");
 const model = require("../constant/model");
 const { USER_NOT_FOUND } = require("../constant/msg");
+const { all } = require("../routes/user");
 
 class AuthManager extends BaseManager {
   constructor() {
@@ -212,7 +213,7 @@ class AuthManager extends BaseManager {
       let { appointment_id } = bodyParams;
       const checkExist = await model.exists({appointment_id});
       if(checkExist){
-        const deletedAppointment = await this._authRepository.findOneAndDelete(
+        const deletedAppointment = await this._authRepository.deleteAppointments(
           model,
           bodyParams
         );
@@ -231,7 +232,8 @@ class AuthManager extends BaseManager {
       if(validationResult.valid){
         const checkExist = await model.exists({appointment_id});
         if(checkExist){
-          const updatedAppointment = await this._authRepository.updateDetails(
+          const updatedAppointment = await this._authRepository.updateAppointments(
+            appointment_id,
             model,
             bodyParams
           );
@@ -248,10 +250,22 @@ class AuthManager extends BaseManager {
 
   async findAllAppointment(model){
     try{
-      const allCompanyDetails = await this._authRepository.find(
+      const allAppointment = await this._authRepository.find(
         model
       );
-      return allCompanyDetails;
+      return allAppointment;
+    }
+    catch (err){
+      throw err;
+    }
+  }
+
+  async findAllMerchant(model){
+    try{
+      const allMerchant = await this._authRepository.find(
+        model
+      );
+      return allMerchant;
     }
     catch (err){
       throw err;

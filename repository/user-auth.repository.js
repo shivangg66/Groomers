@@ -114,6 +114,21 @@ class AuthRepository {
       throw err;
     }
   }
+
+  async deleteAppointments(model, bodyParams){
+    try{
+      const { appointment_id } = bodyParams;
+      const q = await model.findOneAndDelete({ appointment_id }, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return msg.SERVICE_DELETED;
+    }catch(err){
+      throw err;
+    }
+  }
 }
 
 module.exports = AuthRepository;

@@ -134,6 +134,15 @@ class AuthController extends Controller {
             this.error(res, err);
         }
     }
+
+    findAllMerchant = async (req, res) => {
+        try{
+            const findAllMerchant = await this._authManager.findAllMerchant(require(MERCHANT_SIGNUP))
+            this.ok(res, findAllMerchant)
+        } catch (err){
+            this.error(res, err);
+        }
+    }
 }
 
 

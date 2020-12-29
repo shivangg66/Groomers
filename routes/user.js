@@ -12,4 +12,7 @@ router.post("/login", new AuthController().userLogin);
 router.post("/appointment", new AuthController().addAppointment);
 router.delete("/appointment", new AuthController().deleteAppointment);
 router.put("/appointment", new AuthController().updateAppointment);
+
+//api to GET merchant list
+router.get("/allmerchant", new AuthController().findAllMerchant);
 module.exports = router;
