@@ -14,6 +14,7 @@ const SCHEMA = require("../constant/schema");
 const MSG = require("../constant/msg");
 const model = require("../constant/model");
 const { USER_NOT_FOUND } = require("../constant/msg");
+const { all } = require("../routes/user");
 
 class AuthManager extends BaseManager {
   constructor() {
@@ -155,6 +156,120 @@ class AuthManager extends BaseManager {
         throw err;
       }
      
+  }
+  async updateCompanyDetails(bodyParams, model){
+    try{
+      let { customer_id } = bodyParams;
+      const validationResult = this.validate(SCHEMA.COMPANY_DETAILS, bodyParams);
+      if(validationResult.valid){
+        const checkExist = await model.exists({customer_id});
+        if(checkExist){
+          const updatedCompanyDetails = await this._authRepository.updateDetails(
+            model,
+            bodyParams
+          );
+          return updatedCompanyDetails;
+        }
+        throw  new NotFound(MSG.USER_NOT_FOUND);
+      }
+      throw new ValidationError(MSG.VALIDATION_ERROR)
+    } 
+    catch (err){
+      throw err;
+    }
+  }
+
+  async findAllCompanyDetails(model){
+    try{
+      const allCompanyDetails = await this._authRepository.find(
+        model
+      );
+      return allCompanyDetails;
+    }
+    catch (err){
+      throw err;
+    }
+  }
+
+  async addAppointment(bodyParams, model){
+    try{
+      const validationResult = this.validate(SCHEMA.APPOINTMENT, bodyParams);
+      if(validationResult.valid){
+        bodyParams.appointment_id = randomize("Aa0", 4);
+        const appointmentAdded = await this._authRepository.saveOne(
+          model, bodyParams
+        );
+        return appointmentAdded;
+      }
+      throw new ValidationError(MSG.VALIDATION_ERROR)
+    }
+    catch (err){
+      throw err;
+    }
+  }
+
+  async deleteAppointment(bodyParams, model){
+    try{
+      let { appointment_id } = bodyParams;
+      const checkExist = await model.exists({appointment_id});
+      if(checkExist){
+        const deletedAppointment = await this._authRepository.deleteAppointments(
+          model,
+          bodyParams
+        );
+        return deletedAppointment;
+      }
+      throw new NotFound(MSG.USER_NOT_FOUND);
+    }catch (err){
+      throw err;
+    }
+  }
+
+  async updateAppointment(bodyParams, model){
+    try{
+      let { appointment_id } = bodyParams;
+      const validationResult = this.validate(SCHEMA.APPOINTMENT, bodyParams);
+      if(validationResult.valid){
+        const checkExist = await model.exists({appointment_id});
+        if(checkExist){
+          const updatedAppointment = await this._authRepository.updateAppointments(
+            appointment_id,
+            model,
+            bodyParams
+          );
+          return updatedAppointment;
+        }
+        throw  new NotFound(MSG.USER_NOT_FOUND);
+      }
+      throw new ValidationError(MSG.VALIDATION_ERROR)
+    } 
+    catch (err){
+      throw err;
+    }
+  }
+
+  async findAllAppointment(model){
+    try{
+      const allAppointment = await this._authRepository.find(
+        model
+      );
+      return allAppointment;
+    }
+    catch (err){
+      throw err;
+    }
+  }
+
+  async findAllMerchant(model){
+    try{
+      const allMerchant = await this._authRepository.find(
+        model
+      );
+      return allMerchant;
+    }
+    catch (err){
+      throw err;
+    }
   }
 }
 
