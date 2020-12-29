@@ -99,6 +99,21 @@ class AuthRepository {
       throw err;
     }
   }
+
+  async updateAppointments(model, bodyParams){
+    try{
+      const { appointment_id } = bodyParams;
+      const q = await model.findOneAndUpdate({ appointment_id }, bodyParams, {new: true}, function(err){
+        if(err){
+          throw err;
+        }
+      }).lean()
+      .exec()
+      return q;
+    }catch(err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = AuthRepository;
